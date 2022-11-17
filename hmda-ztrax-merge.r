@@ -51,15 +51,8 @@ library(gtools)
 
 # Make the database connection for retrieving Zillow data via SQL
   database <- odbcConnect("sql_test")
-  
-  
-  
-  
-  
-  
+
   # HMDA data
-  
-  
   hmda2 <- readRDS("C:/HMDA_Raw/intermediate_merges/hmda_groups_1_to_2.rds")
   hmda3 <- readRDS("C:/HMDA_Raw/intermediate_merges/hmda_group_3.rds")
   hmda3 <-hmda3[ c("action_taken_name", "agency_code")] 
@@ -70,8 +63,7 @@ library(gtools)
   hmda5 <-hmda5[ c("denial_reason_1")] 
   
   #hmda6 <- readRDS("C:/HMDA_Raw/intermediate_merges/hmda_group_6.rds")
-  
-  
+    
   hmda7 <- readRDS("C:/HMDA_Raw/intermediate_merges/hmda_group_7.rds")
   hmda7 <- hmda7[c("lien_status" , "loan_purpose")]
   #hmda8 <- readRDS("C:/HMDA_Raw/intermediate_merges/hmda_group_8.rds")
@@ -87,9 +79,7 @@ library(gtools)
   rm(hmda10)
   write.csv(hmda_final, file = "hmda_final.csv")
   save(hmda_final, file = "C:/HMDA_R_Files/hmda_final.RData")
-  
-  
-  
+
 #FULL HMDA DATA
  
   #HMDA 2007-2016
@@ -101,11 +91,7 @@ library(gtools)
   load("C:/HMDA_Raw/hmda_final1995_2001.RData")
   hmda_final95_01 <- as.data.frame(hmda_final)
   hmda_final95_01$rate_spread <- hmda_final95_01$loan_purpose_name <- hmda_final95_01$action_taken_name <- NULL
-  
-  #HMDA 2002-2006
-  ##bad for some reason
-  hmda_final <- read_dta("C:/Users/billinsb/Dropbox/BBGL_Sealevels/Data/HMDA/hmda2002_2006.dta") 
-  
+
   #load("C:/HMDA_Raw/hmda_final2002_2006.RData")
   hmda_final02_06 <- as.data.frame(hmda_final)
   hmda_final02_06$rate_spread <- hmda_final02_06$loan_purpose_name <- hmda_final02_06$action_taken_name <- NULL
@@ -139,47 +125,7 @@ library(gtools)
     state = c(),
     year = c()
   )
-  
-  
-  # MD - no lender names but can do other matches
-  #No loan amounts - VT
-  ##Missing loan amount in some years/few loan amount values - GA (2016 - none), WY
-  
-  #state.id <- c("AL", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",  "ID",
-  #             "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO",
-  #            "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", 
-  #           "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY") 
-  
 
-  
-  
-  # MD - no lender names but can do other matches
-  #No loan amounts - VT
-  ##Missing loan amount in some years/few loan amount values - GA (2016 - none), WY
-  
-  
-  #Bring in older hmda data
-  memory.limit(size=5120000000)
-  library(haven)
-
-  
-  
-  state.id <- c("AL", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA",  "ID",
-              "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN" , "MS", "MO",
-            "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", 
-         "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY") 
-  
- 
-  #MD, MN has no lendername.
- 
- 
- 
-  year.id <- c(1995:2016)
-  
-
-  # Define list to store elements of final data.table
-  list <- vector("list", length(state.id)*length(year.id))
-  
   #---------------------------------------------------------------------------------------------------
   # LOOP
   #---------------------------------------------------------------------------------------------------
